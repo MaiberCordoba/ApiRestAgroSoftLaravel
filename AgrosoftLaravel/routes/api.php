@@ -14,7 +14,7 @@ Route::prefix('usuarios')->group(function () {
     // Rutas protegidas por JWT
     Route::middleware('jwt.verify')->group(function () {
         Route::get('/', [UsuariosController::class, 'getAll']);
-        Route::put('/{identificacion}', [UsuariosController::class, 'update']);
-        Route::get('/current', [UsuariosController::class, 'getCurrentUser']);
+        Route::patch('/{identificacion}', [UsuariosController::class, 'update']);
+        Route::get('/me', [UsuariosController::class, 'getCurrentUser']);
     });
 });
