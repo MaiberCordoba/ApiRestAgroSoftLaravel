@@ -6,6 +6,8 @@ use App\Models\Lotes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
+
 
 class LotesController extends Controller
 {
@@ -16,7 +18,7 @@ class LotesController extends Controller
             $lotes = Lotes::all();
             return response()->json($lotes, 200);
         } catch (\Exception $e) {
-            \Log::error($e);
+            Log::error($e);
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }
@@ -54,10 +56,10 @@ class LotesController extends Controller
             if ($e->getCode() === '23000') { // Integrity constraint violation (e.g., unique constraint)
                 return response()->json(['msg' => 'El nombre del lote ya existe. Debe ser único.'], 409);
             }
-            \Log::error($e);
+            Log::error($e);
             return response()->json(['msg' => 'Internal server error'], 500);
         } catch (\Exception $e) {
-            \Log::error($e);
+            Log::error($e);
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }
@@ -91,10 +93,10 @@ class LotesController extends Controller
             if ($e->getCode() === '23000') {
                 return response()->json(['msg' => 'El nombre del lote ya existe. Debe ser único.'], 409);
             }
-            \Log::error($e);
+            Log::error($e);
             return response()->json(['msg' => 'Internal server error'], 500);
         } catch (\Exception $e) {
-            \Log::error($e);
+            Log::error($e);
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }
@@ -111,7 +113,7 @@ class LotesController extends Controller
             $lote->delete();
             return response()->json(['msg' => 'Lote eliminado correctamente'], 200);
         } catch (\Exception $e) {
-            \Log::error($e);
+            Log::error($e);
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }
@@ -126,7 +128,7 @@ class LotesController extends Controller
             }
             return response()->json(['msg' => 'Lote no encontrado'], 404);
         } catch (\Exception $e) {
-            \Log::error($e);
+            Log::error($e);
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }
@@ -145,7 +147,7 @@ class LotesController extends Controller
             }
             return response()->json($lotes, 200);
         } catch (\Exception $e) {
-            \Log::error($e);
+            Log::error($e);
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }
@@ -164,7 +166,7 @@ class LotesController extends Controller
             }
             return response()->json($lotes, 200);
         } catch (\Exception $e) {
-            \Log::error($e);
+            Log::error($e);
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }
@@ -183,7 +185,7 @@ class LotesController extends Controller
             }
             return response()->json($lotes, 200);
         } catch (\Exception $e) {
-            \Log::error($e);
+            Log::error($e);
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }

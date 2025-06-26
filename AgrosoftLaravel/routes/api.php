@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ErasController;
 use App\Http\Controllers\LotesController;
 use App\Http\Controllers\UsuariosController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('usuarios')->group(function () {
     // Rutas públicas
@@ -34,4 +36,13 @@ Route::prefix('lotes')->middleware('jwt.verify')->group(function () {
 
     // Reportes
     Route::get('/reporte/dimensiones/{tamX}/{tamY}', [LotesController::class, 'getByDimensiones']);
+});
+
+Route::prefix('eras')->middleware('auth:api')->group(function () {
+    Route::get('/', [ErasController::class, 'index'])->name('index');
+    Route::get('/{id}', [ErasController::class, 'show'])->name('show');
+    Route::post('/', [ErasController::class, 'store'])->name('store');
+    Route::patch('/{id}', [ErasController::class, 'update'])->name('update');
+    Route::delete('/{id}', [ErasController::class, 'destroy'])->name('destroy');
+    Route::get('/reporte/{id}', [ErasController::class, 'getByLoteId'])->name('reporte');
 });
