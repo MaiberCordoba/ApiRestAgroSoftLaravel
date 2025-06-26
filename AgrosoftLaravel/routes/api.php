@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\ErasController;
+use App\Http\Controllers\LotesController;
 use App\Http\Controllers\UsuariosController;
+<<<<<<< Karen
 use App\Http\Controllers;
+=======
+>>>>>>> master
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('usuarios')->group(function () {
@@ -21,6 +26,7 @@ Route::prefix('usuarios')->group(function () {
     });
 });
 
+<<<<<<< Karen
 // Sensor
 Route::prefix('sensores')->group(function () {
     Route::get('/', [\App\Http\Controllers\SensorController::class, 'index']);
@@ -33,3 +39,29 @@ Route::prefix('umbrales')->group(function () {
     Route::put('/{id}', [\App\Http\Controllers\UmbralController::class, 'update']);
     Route::delete('/{id}', [\App\Http\Controllers\UmbralController::class, 'destroy']);
 });
+=======
+Route::prefix('lotes')->middleware('jwt.verify')->group(function () {
+    // CRUD 
+    Route::get('/', [LotesController::class, 'index']);
+    Route::get('/{id}', [LotesController::class, 'show']);
+    Route::post('/', [LotesController::class, 'store']);
+    Route::patch('/{id}', [LotesController::class, 'update']);
+    Route::delete('/{id}', [LotesController::class, 'destroy']);
+
+    // Búsquedas específicas
+    Route::get('/ubicacion/{posX}/{posY}', [LotesController::class, 'getByUbicacion']);
+    Route::get('/estado/{estado}', [LotesController::class, 'getByEstado']);
+
+    // Reportes
+    Route::get('/reporte/dimensiones/{tamX}/{tamY}', [LotesController::class, 'getByDimensiones']);
+});
+
+Route::prefix('eras')->middleware('auth:api')->group(function () {
+    Route::get('/', [ErasController::class, 'index'])->name('index');
+    Route::get('/{id}', [ErasController::class, 'show'])->name('show');
+    Route::post('/', [ErasController::class, 'store'])->name('store');
+    Route::patch('/{id}', [ErasController::class, 'update'])->name('update');
+    Route::delete('/{id}', [ErasController::class, 'destroy'])->name('destroy');
+    Route::get('/reporte/{id}', [ErasController::class, 'getByLoteId'])->name('reporte');
+});
+>>>>>>> master
