@@ -3,10 +3,7 @@
 use App\Http\Controllers\ErasController;
 use App\Http\Controllers\LotesController;
 use App\Http\Controllers\UsuariosController;
-<<<<<<< Karen
 use App\Http\Controllers;
-=======
->>>>>>> master
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('usuarios')->group(function () {
@@ -26,20 +23,7 @@ Route::prefix('usuarios')->group(function () {
     });
 });
 
-<<<<<<< Karen
-// Sensor
-Route::prefix('sensores')->group(function () {
-    Route::get('/', [\App\Http\Controllers\SensorController::class, 'index']);
-    Route::post('/', [\App\Http\Controllers\SensorController::class, 'store']);
-    Route::get('/{id}', [\App\Http\Controllers\SensorController::class, 'show']);
-});
-// Umbral
-Route::prefix('umbrales')->group(function () {
-    Route::post('/{sensorId}', [\App\Http\Controllers\UmbralController::class, 'store']);
-    Route::put('/{id}', [\App\Http\Controllers\UmbralController::class, 'update']);
-    Route::delete('/{id}', [\App\Http\Controllers\UmbralController::class, 'destroy']);
-});
-=======
+
 Route::prefix('lotes')->middleware('jwt.verify')->group(function () {
     // CRUD 
     Route::get('/', [LotesController::class, 'index']);
@@ -64,4 +48,18 @@ Route::prefix('eras')->middleware('auth:api')->group(function () {
     Route::delete('/{id}', [ErasController::class, 'destroy'])->name('destroy');
     Route::get('/reporte/{id}', [ErasController::class, 'getByLoteId'])->name('reporte');
 });
->>>>>>> master
+
+
+
+// Sensor
+Route::prefix('sensores')->group(function () {
+    Route::get('/', [\App\Http\Controllers\SensorController::class, 'index']);
+    Route::post('/', [\App\Http\Controllers\SensorController::class, 'store']);
+    Route::get('/{id}', [\App\Http\Controllers\SensorController::class, 'show']);
+});
+// Umbral
+Route::prefix('umbrales')->group(function () {
+    Route::post('/{sensorId}', [\App\Http\Controllers\UmbralController::class, 'store']);
+    Route::put('/{id}', [\App\Http\Controllers\UmbralController::class, 'update']);
+    Route::delete('/{id}', [\App\Http\Controllers\UmbralController::class, 'destroy']);
+});
