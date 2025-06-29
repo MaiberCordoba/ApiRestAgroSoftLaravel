@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ErasController;
+use App\Http\Controllers\EspeciesController;
 use App\Http\Controllers\LotesController;
 use App\Http\Controllers\TiposEspecieController;
 use App\Http\Controllers\UsuariosController;
@@ -59,6 +60,13 @@ Route::prefix('tiposEspecie')->middleware('auth:api')->group(function () {
     Route::post('/', [TiposEspecieController::class, 'store'])->name('tipos.store');
     Route::patch('/{id}', [TiposEspecieController::class, 'update'])->name('tipos.update');
     Route::delete('/{id}', [TiposEspecieController::class, 'destroy'])->name('tipos.destroy');
+});
+
+Route::middleware('auth:api')->prefix('especies')->group(function () {
+    Route::get('/', [EspeciesController::class, 'index']);
+    Route::post('/', [EspeciesController::class, 'store']);
+    Route::patch('/{id}', [EspeciesController::class, 'update']);
+    Route::delete('/{id}', [EspeciesController::class, 'destroy']);
 });
 
 // RUTAS IoT
