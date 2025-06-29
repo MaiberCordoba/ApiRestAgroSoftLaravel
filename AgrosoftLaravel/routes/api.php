@@ -4,6 +4,7 @@ use App\Http\Controllers\CultivosController;
 use App\Http\Controllers\ErasController;
 use App\Http\Controllers\EspeciesController;
 use App\Http\Controllers\LotesController;
+use App\Http\Controllers\PlantacionesController;
 use App\Http\Controllers\SemillerosController;
 use App\Http\Controllers\TiposEspecieController;
 use App\Http\Controllers\UsuariosController;
@@ -87,6 +88,19 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/semilleros', [SemillerosController::class, 'store']);
     Route::patch('/semilleros/{id}', [SemillerosController::class, 'update']);
     Route::delete('/semilleros/{id}', [SemillerosController::class, 'destroy']);
+});
+
+Route::middleware('auth:api')->prefix('plantaciones')->group(function () {
+    Route::get('/', [PlantacionesController::class, 'index']);
+    Route::post('/', [PlantacionesController::class, 'store']);
+    Route::patch('/{id}', [PlantacionesController::class, 'update']);
+    Route::delete('/{id}', [PlantacionesController::class, 'destroy']);
+    Route::get('/{id}', [PlantacionesController::class, 'show']);
+
+    // Filtros personalizados
+    Route::get('/era/{fk_Eras}', [PlantacionesController::class, 'byEra']);
+    Route::get('/cultivo/{fk_Cultivos}', [PlantacionesController::class, 'byCrop']);
+    Route::get('/{fk_Eras}/{fk_Cultivos}', [PlantacionesController::class, 'byCropAndEra']);
 });
 
 // RUTAS IoT
