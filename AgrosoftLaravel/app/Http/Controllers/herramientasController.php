@@ -6,6 +6,8 @@ use App\Models\Herramientas;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
+
 use Exception;
 
 class HerramientasController extends Controller
@@ -28,8 +30,8 @@ class HerramientasController extends Controller
             $validated = $request->validate([
                 'nombre' => 'required|string|max:255',
                 'descripcion' => 'nullable|string',
-                'estado' => 'nullable|string|in:Disponible,EnUso,Dañada', // ajusta según tus valores válidos
-                'cantidad' => 'required|integer|min:0',
+                'unidades' => 'required|integer|min:0',
+                'fk_Lotes' => 'required'
             ]);
 
             Herramientas::create($validated);
@@ -38,6 +40,7 @@ class HerramientasController extends Controller
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         } catch (Exception $e) {
+            Log ::error($e->getMessage());
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }
@@ -49,10 +52,10 @@ class HerramientasController extends Controller
             $herramienta = Herramientas::findOrFail($id);
 
             $validated = $request->validate([
-                'nombre' => 'sometimes|string|max:255',
-                'descripcion' => 'sometimes|string',
-                'estado' => 'sometimes|string|in:Disponible,EnUso,Dañada',
-                'cantidad' => 'sometimes|integer|min:0',
+                'nombre' => 'required|string|max:255',
+                'descripcion' => 'nullable|string',
+                'unidades' => 'required|integer|min:0',
+                'fk_Lotes' => 'required'
             ]);
 
             $herramienta->update($validated);
