@@ -69,7 +69,7 @@ class ActividadesController extends Controller
                 'titulo' => 'sometimes|string|max:255',
                 'descripcion' => 'sometimes|string',
                 'fecha' => 'sometimes|date',
-                'estado' => 'sometimes|string|in:Asignada,EnProceso,Finalizada',
+                'estado' => 'sometimes|string|in:Asignada,Cancelada,Completada',
             ]);
 
             $actividad->update($validated);
