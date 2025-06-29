@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('herramientas', function (Blueprint $table) {
             $table->id();
-            $table->integer('fk_Lotes');
             $table->string('nombre');
             $table->text('descripcion');
             $table->integer('unidades');
             $table->timestamps();
 
-            $table->foreign('fk_Lotes')->references('id')->on('lotes')->onDelete('cascade');
+            $table->foreignId('fk_Lotes')->references('id')->on('lotes')->onDelete('cascade');
         });
     }
 

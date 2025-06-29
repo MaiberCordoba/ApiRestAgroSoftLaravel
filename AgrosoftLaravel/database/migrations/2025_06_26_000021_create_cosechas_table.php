@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cosechas', function (Blueprint $table) {
             $table->id();
-            $table->integer('fk_Cultivos');
+            $table->unsignedBigInteger('fk_Cultivos');
             $table->integer('unidades');
             $table->date('fecha');
             $table->timestamps();

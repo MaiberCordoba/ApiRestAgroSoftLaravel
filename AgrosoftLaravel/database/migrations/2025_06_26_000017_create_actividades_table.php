@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('actividades', function (Blueprint $table) {
             $table->id();
-            $table->integer('fk_Cultivos');
+            $table->unsignedBigInteger('fk_Cultivos');
             $table->unsignedBigInteger('fk_Usuarios');
             $table->string('titulo');
             $table->text('descripcion');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('estado', ['Asignada','Cancelada','Completada'])->default('Asignada');
             $table->timestamps();
 
-            $table->foreign('fk_Cultivos')->references('id')->on('cultivos')->onDelete('cascade'); */
+            $table->foreign('fk_Cultivos')->references('id')->on('cultivos')->onDelete('cascade'); 
             $table->foreign('fk_Usuarios')->references('id')->on('usuarios')->onDelete('cascade');
         });
     }

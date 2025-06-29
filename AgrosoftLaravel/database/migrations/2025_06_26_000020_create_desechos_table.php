@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('desechos', function (Blueprint $table) {
             $table->id();
-            $table->integer('fk_Cultivos');
+            $table->unsignedBigInteger('fk_Cultivos');
             $table->unsignedBigInteger('fk_TiposDesecho');
             $table->string('nombre');
             $table->text('descripcion');
