@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('herramientas', function (Blueprint $table) {
+        Schema::create('cosechas', function (Blueprint $table) {
             $table->id();
-            $table->integer('fk_Lotes');
-            $table->string('nombre');
-            $table->text('descripcion');
+            $table->integer('fk_Cultivos');
             $table->integer('unidades');
+            $table->date('fecha');
             $table->timestamps();
 
-            //$table->foreign('fk_Lotes')->references('id')->on('lotes')->onDelete('cascade');
+            $table->foreign('fk_Cultivos')->references('id')->on('cultivos')->onDelete('cascade');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('herramientas');
+        Schema::dropIfExists('cosechas');
     }
 };

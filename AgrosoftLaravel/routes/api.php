@@ -23,7 +23,7 @@ Route::prefix('usuarios')->group(function () {
     Route::post('/refresh', [UsuariosController::class, 'refreshToken']);
     
     // Rutas protegidas por JWT
-    Route::middleware('jwt.verify')->group(function () {
+    Route::middleware('auth:api')->group(function () {
         Route::get('/', [UsuariosController::class, 'getAll']);
         Route::patch('/{identificacion}', [UsuariosController::class, 'update']);
         Route::get('/me', [UsuariosController::class, 'getCurrentUser']);
@@ -32,7 +32,7 @@ Route::prefix('usuarios')->group(function () {
 
 //RUTAS TRAZABILIDAD
 
-Route::prefix('lotes')->middleware('jwt.verify')->group(function () {
+Route::prefix('lotes')->middleware('auth:api')->group(function () {
     // CRUD 
     Route::get('/', [LotesController::class, 'index']);
     Route::get('/{id}', [LotesController::class, 'show']);
@@ -104,7 +104,7 @@ Route::middleware('auth:api')->prefix('plantaciones')->group(function () {
 //RUTAS FINANZAS
 use App\Http\Controllers\ActividadesController;
 
-Route::prefix('actividades')->middleware('jwt.verify')->group(function () {
+Route::prefix('actividades')->middleware('auth:api')->group(function () {
     Route::get('/', [ActividadesController::class, 'index']);
     Route::post('/', [ActividadesController::class, 'store']);
     Route::get('/{id}', [ActividadesController::class, 'show']);
@@ -113,7 +113,7 @@ Route::prefix('actividades')->middleware('jwt.verify')->group(function () {
 
 use App\Http\Controllers\CosechasController;
 
-Route::prefix('cosechas')->middleware('jwt.verify')->group(function () {
+Route::prefix('cosechas')->middleware('auth:api')->group(function () {
     Route::get('/', [CosechasController::class, 'index']);
     Route::post('/', [CosechasController::class, 'store']);
     Route::get('/{id}', [CosechasController::class, 'show']);
@@ -122,7 +122,7 @@ Route::prefix('cosechas')->middleware('jwt.verify')->group(function () {
 
 use App\Http\Controllers\DesechosController;
 
-Route::prefix('desechos')->middleware('jwt.verify')->group(function () {
+Route::prefix('desechos')->middleware('auth:api')->group(function () {
     Route::get('/', [DesechosController::class, 'index']);
     Route::post('/', [DesechosController::class, 'store']);
     Route::get('/{id}', [DesechosController::class, 'show']);
@@ -131,7 +131,7 @@ Route::prefix('desechos')->middleware('jwt.verify')->group(function () {
 
 use App\Http\Controllers\HerramientasController;
 
-Route::prefix('herramientas')->middleware('jwt.verify')->group(function () {
+Route::prefix('herramientas')->middleware('auth:api')->group(function () {
     Route::get('/', [HerramientasController::class, 'index']);
     Route::post('/', [HerramientasController::class, 'store']);
     Route::get('/{id}', [HerramientasController::class, 'show']);
@@ -140,7 +140,7 @@ Route::prefix('herramientas')->middleware('jwt.verify')->group(function () {
 
 use App\Http\Controllers\InsumosController;
 
-Route::prefix('insumos')->middleware('jwt.verify')->group(function () {
+Route::prefix('insumos')->middleware('auth:api')->group(function () {
     Route::get('/', [InsumosController::class, 'index']);
     Route::post('/', [InsumosController::class, 'store']);
     Route::get('/{id}', [InsumosController::class, 'show']);
@@ -149,7 +149,7 @@ Route::prefix('insumos')->middleware('jwt.verify')->group(function () {
 
 use App\Http\Controllers\TiposDesechoController;
 
-Route::prefix('tiposDesecho')->middleware('jwt.verify')->group(function () {
+Route::prefix('tiposDesecho')->middleware('auth:api')->group(function () {
     Route::get('/', [TiposDesechoController::class, 'index']);
     Route::post('/', [TiposDesechoController::class, 'store']);
     Route::get('/{id}', [TiposDesechoController::class, 'show']);
@@ -158,7 +158,7 @@ Route::prefix('tiposDesecho')->middleware('jwt.verify')->group(function () {
 
 use App\Http\Controllers\UsosHerramientasController;
 
-Route::prefix('usosHerramientas')->middleware('jwt.verify')->group(function () {
+Route::prefix('usosHerramientas')->middleware('auth:api')->group(function () {
     Route::get('/', [UsosHerramientasController::class, 'index']);
     Route::post('/', [UsosHerramientasController::class, 'store']);
     Route::get('/{id}', [UsosHerramientasController::class, 'show']);
@@ -167,7 +167,7 @@ Route::prefix('usosHerramientas')->middleware('jwt.verify')->group(function () {
 
 use App\Http\Controllers\UsosProductosController;
 
-Route::prefix('usosProductos')->middleware('jwt.verify')->group(function () {
+Route::prefix('usosProductos')->middleware('auth:api')->group(function () {
     Route::get('/', [UsosProductosController::class, 'index']);
     Route::post('/', [UsosProductosController::class, 'store']);
     Route::get('/{id}', [UsosProductosController::class, 'show']);
@@ -176,7 +176,7 @@ Route::prefix('usosProductos')->middleware('jwt.verify')->group(function () {
 
 use App\Http\Controllers\VentasController;
 
-Route::prefix('ventas')->middleware('jwt.verify')->group(function () {
+Route::prefix('ventas')->middleware('auth:api')->group(function () {
     Route::get('/', [VentasController::class, 'index']);
     Route::post('/', [VentasController::class, 'store']);
     Route::get('/{id}', [VentasController::class, 'show']);

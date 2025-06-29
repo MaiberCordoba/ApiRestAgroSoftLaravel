@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('desechos', function (Blueprint $table) {
+        Schema::create('herramientas', function (Blueprint $table) {
             $table->id();
-            $table->integer('fk_Cultivos');
-            $table->unsignedBigInteger('fk_TiposDesecho');
+            $table->integer('fk_Lotes');
             $table->string('nombre');
             $table->text('descripcion');
+            $table->integer('unidades');
             $table->timestamps();
 
-            //$table->foreign('fk_Cultivos')->references('id')->on('cultivos')->onDelete('cascade');
-            $table->foreign('fk_TiposDesecho')->references('id')->on('tiposdesecho')->onDelete('cascade');
+            $table->foreign('fk_Lotes')->references('id')->on('lotes')->onDelete('cascade');
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('desechos');
+        Schema::dropIfExists('herramientas');
     }
 };
