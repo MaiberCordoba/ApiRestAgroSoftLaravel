@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\ErasController;
 use App\Http\Controllers\LotesController;
+use App\Http\Controllers\TiposEspecieController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
+
+//RUTAS USUARIOS
 
 Route::prefix('usuarios')->group(function () {
     // Rutas públicas
@@ -23,6 +26,8 @@ Route::prefix('usuarios')->group(function () {
     });
 });
 
+
+//RUTAS TRAZABILIDAD
 
 Route::prefix('lotes')->middleware('jwt.verify')->group(function () {
     // CRUD 
@@ -49,7 +54,14 @@ Route::prefix('eras')->middleware('auth:api')->group(function () {
     Route::get('/reporte/{id}', [ErasController::class, 'getByLoteId'])->name('reporte');
 });
 
+Route::prefix('tiposEspecie')->middleware('auth:api')->group(function () {
+    Route::get('/', [TiposEspecieController::class, 'index'])->name('tipos.index');
+    Route::post('/', [TiposEspecieController::class, 'store'])->name('tipos.store');
+    Route::patch('/{id}', [TiposEspecieController::class, 'update'])->name('tipos.update');
+    Route::delete('/{id}', [TiposEspecieController::class, 'destroy'])->name('tipos.destroy');
+});
 
+// RUTAS IoT
 
 // Sensor
 Route::prefix('sensores')->group(function () {
