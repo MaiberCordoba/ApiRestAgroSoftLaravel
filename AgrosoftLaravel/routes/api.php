@@ -17,7 +17,7 @@ Route::prefix('usuarios')->group(function () {
     // Rutas públicas
     Route::post('/', [UsuariosController::class, 'store']);
     Route::post('/login', [UsuariosController::class, 'login']);
-    Route::get('/stats', [UsuariosController::class, 'getTotalUsers']);
+    Route::get('/reporteUsuarios', [UsuariosController::class, 'getTotalUsers']);
     
     // Ruta de refresh (¡debe ser pública!)
     Route::post('/refresh', [UsuariosController::class, 'refreshToken']);
