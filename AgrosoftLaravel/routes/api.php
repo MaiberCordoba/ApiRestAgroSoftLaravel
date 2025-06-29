@@ -4,6 +4,7 @@ use App\Http\Controllers\CultivosController;
 use App\Http\Controllers\ErasController;
 use App\Http\Controllers\EspeciesController;
 use App\Http\Controllers\LotesController;
+use App\Http\Controllers\SemillerosController;
 use App\Http\Controllers\TiposEspecieController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers;
@@ -79,6 +80,13 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/cultivos/especie/{fk_Especies}', [CultivosController::class, 'porEspecie']);
     Route::get('/cultivos/siembra/{fechaSiembra}', [CultivosController::class, 'porSiembra']);
     Route::get('/reporte/cultivos/activos', [CultivosController::class, 'reporteActivos']);
+});
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('/semilleros', [SemillerosController::class, 'index']);
+    Route::post('/semilleros', [SemillerosController::class, 'store']);
+    Route::patch('/semilleros/{id}', [SemillerosController::class, 'update']);
+    Route::delete('/semilleros/{id}', [SemillerosController::class, 'destroy']);
 });
 
 // RUTAS IoT
