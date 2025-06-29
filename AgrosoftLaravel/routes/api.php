@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CultivosController;
 use App\Http\Controllers\ErasController;
 use App\Http\Controllers\EspeciesController;
 use App\Http\Controllers\LotesController;
@@ -67,6 +68,17 @@ Route::middleware('auth:api')->prefix('especies')->group(function () {
     Route::post('/', [EspeciesController::class, 'store']);
     Route::patch('/{id}', [EspeciesController::class, 'update']);
     Route::delete('/{id}', [EspeciesController::class, 'destroy']);
+});
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('/cultivos', [CultivosController::class, 'index']);
+    Route::post('/cultivos', [CultivosController::class, 'store']);
+    Route::get('/cultivos/{id}', [CultivosController::class, 'show']);
+    Route::patch('/cultivos/{id}', [CultivosController::class, 'update']);
+    Route::delete('/cultivos/{id}', [CultivosController::class, 'destroy']);
+    Route::get('/cultivos/especie/{fk_Especies}', [CultivosController::class, 'porEspecie']);
+    Route::get('/cultivos/siembra/{fechaSiembra}', [CultivosController::class, 'porSiembra']);
+    Route::get('/reporte/cultivos/activos', [CultivosController::class, 'reporteActivos']);
 });
 
 // RUTAS IoT
