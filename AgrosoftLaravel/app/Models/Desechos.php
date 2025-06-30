@@ -11,7 +11,7 @@ class Desechos extends Model
 
     protected $fillable = [
         'fk_Cultivos',
-        'fk_TiposDesechos',
+        'fk_TiposDesecho',
         'nombre',
         'descripcion',
     ];

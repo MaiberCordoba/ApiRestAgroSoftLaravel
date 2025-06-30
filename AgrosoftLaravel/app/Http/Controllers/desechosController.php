@@ -26,11 +26,10 @@ class DesechosController extends Controller
     {
         try {
             $validated = $request->validate([
-                'nombre' => 'required|string|max:255',
-                'descripcion' => 'nullable|string',
-                'fecha' => 'required|date',
-                'fk_TiposDesecho' => 'required|integer|exists:tiposdesecho,id',
-                'estado' => 'nullable|string|in:Activo,Inactivo', // según tus enums
+                'nombre' => 'required',
+                'descripcion' => 'required',
+                'fk_TiposDesecho' => 'required',
+                'fk_Cultivos' => 'required',
             ]);
 
             Desechos::create($validated);
@@ -50,11 +49,10 @@ class DesechosController extends Controller
             $desecho = Desechos::findOrFail($id);
 
             $validated = $request->validate([
-                'nombre' => 'sometimes|string|max:255',
-                'descripcion' => 'sometimes|string',
-                'fecha' => 'sometimes|date',
-                'fk_TiposDesecho' => 'sometimes|integer|exists:tiposdesecho,id',
-                'estado' => 'sometimes|string|in:Activo,Inactivo',
+                'nombre' => 'required',
+                'descripcion' => 'required',
+                'fk_TiposDesecho' => 'required',
+                'fk_Cultivos' => 'required',
             ]);
 
             $desecho->update($validated);

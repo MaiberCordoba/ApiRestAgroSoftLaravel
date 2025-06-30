@@ -26,9 +26,9 @@ class VentasController extends Controller
     {
         try {
             $validated = $request->validate([
-                'fecha' => 'required|date',
-                'valorTotal' => 'required|numeric|min:0',
-                // agrega aquí más campos según tu base de datos
+                'fk_Cosechas'=> 'required',
+                'precioUnitario'=> 'required',
+                'fecha'=> 'required',
             ]);
 
             Ventas::create($validated);
@@ -48,9 +48,9 @@ class VentasController extends Controller
             $venta = Ventas::findOrFail($id);
 
             $validated = $request->validate([
-                'fecha' => 'sometimes|date',
-                'valorTotal' => 'sometimes|numeric|min:0',
-                // más campos si es necesario
+               'fk_Cosechas'=> 'required',
+                'precioUnitario'=> 'required',
+                'fecha'=> 'required',
             ]);
 
             $venta->update($validated);

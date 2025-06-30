@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TiposDesecho extends Model
 {
+    protected $table = 'tiposdesecho';
     use HasFactory;
 
     protected $fillable = [

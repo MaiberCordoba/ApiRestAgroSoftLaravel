@@ -149,7 +149,7 @@ Route::prefix('insumos')->middleware('auth:api')->group(function () {
 
 use App\Http\Controllers\TiposDesechoController;
 
-Route::prefix('tiposDesecho')->middleware('auth:api')->group(function () {
+Route::prefix('tipos-desechos')->middleware('auth:api')->group(function () {
     Route::get('/', [TiposDesechoController::class, 'index']);
     Route::post('/', [TiposDesechoController::class, 'store']);
     Route::get('/{id}', [TiposDesechoController::class, 'show']);
