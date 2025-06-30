@@ -26,11 +26,9 @@ class CosechasController extends Controller
     {
         try {
             $validated = $request->validate([
-                'fk_Cultivo' => 'required|integer|exists:cultivos,id',
+                'fk_Cultivos' => 'required|integer|exists:cultivos,id',
                 'fecha' => 'required|date',
-                'cantidad' => 'required|numeric',
-                'unidad' => 'required|string|max:50',
-                'estado' => 'nullable|string|in:Disponible,Agotada', // según tus enums reales
+                'unidades' => 'required',
             ]);
 
             Cosechas::create($validated);
@@ -50,11 +48,9 @@ class CosechasController extends Controller
             $cosecha = Cosechas::findOrFail($id);
 
             $validated = $request->validate([
-                'fk_Cultivo' => 'sometimes|integer|exists:cultivos,id',
-                'fecha' => 'sometimes|date',
-                'cantidad' => 'sometimes|numeric',
-                'unidad' => 'sometimes|string|max:50',
-                'estado' => 'sometimes|string|in:Disponible,Agotada',
+                'fk_Cultivos' => 'required|integer|exists:cultivos,id',
+                'fecha' => 'required|date',
+                'unidades' => 'required',
             ]);
 
             $cosecha->update($validated);
