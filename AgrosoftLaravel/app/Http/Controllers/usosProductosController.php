@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
 use Exception;
+use Log;
 
 class UsosProductosController extends Controller
 {
@@ -17,6 +18,7 @@ class UsosProductosController extends Controller
             $usos = UsosProductos::all();
             return response()->json($usos, 200);
         } catch (Exception $e) {
+            Log::error($e->getMessage());
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }
@@ -26,8 +28,8 @@ class UsosProductosController extends Controller
     {
         try {
             $validated = $request->validate([
-                'fk_Insumo' => 'required|integer|exists:insumos,id',
-                'fk_Actividad' => 'required|integer|exists:actividades,id',
+                'fk_Insumos' => 'required',
+                'fk_Actividades' => 'required',
                 'cantidadProducto' => 'required|numeric|min:0',
             ]);
 
@@ -37,6 +39,7 @@ class UsosProductosController extends Controller
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         } catch (Exception $e) {
+            Log::error($e->getMessage());
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }
