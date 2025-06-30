@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Sensor extends Model
 {
+    protected $table = 'sensores';
     protected $fillable = [
         'tipo_sensor',
         'datos_sensor',

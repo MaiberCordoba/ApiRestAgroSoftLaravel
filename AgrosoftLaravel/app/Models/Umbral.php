@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Umbral extends Model
 {
+    protected $table= 'umbrales';
     protected $fillable = [
         'sensor_id',
         'valor_minimo',

@@ -192,7 +192,8 @@ Route::prefix('sensores')->group(function () {
     Route::get('/{id}', [\App\Http\Controllers\SensorController::class, 'show']);
 });
 // Umbral
-Route::prefix('umbrales')->group(function () {
+Route::prefix('umbral')->group(function () {
+    Route::get('/', [\App\Http\Controllers\UmbralController::class, 'index']);
     Route::post('/{sensorId}', [\App\Http\Controllers\UmbralController::class, 'store']);
     Route::put('/{id}', [\App\Http\Controllers\UmbralController::class, 'update']);
     Route::delete('/{id}', [\App\Http\Controllers\UmbralController::class, 'destroy']);

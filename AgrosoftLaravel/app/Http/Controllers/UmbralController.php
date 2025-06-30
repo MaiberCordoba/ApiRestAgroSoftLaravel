@@ -4,11 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Sensor;
 use App\Models\Umbral;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class UmbralController extends Controller
 {
+
+
+    public function index()
+    {
+        try {
+            $umbrales = Umbral::all();
+            return response()->json($umbrales, 200);
+        } catch (Exception $e) {
+             \Log::error('Error al listar los umbrales: ' . $e->getMessage());
+            return response()->json(['msg' => 'Internal server error'], 500);
+        }
+    }
     /**
      * Crear un umbral para un sensor
      */
