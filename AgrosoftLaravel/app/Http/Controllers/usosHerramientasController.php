@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
 use Exception;
+use Log;
 
 class UsosHerramientasController extends Controller
 {
@@ -17,6 +18,7 @@ class UsosHerramientasController extends Controller
             $usos = UsosHerramientas::all();
             return response()->json($usos, 200);
         } catch (Exception $e) {
+            Log::error($e->getMessage());
             return response()->json(['msg' => 'Internal server error'], 500);
         }
     }
@@ -26,10 +28,8 @@ class UsosHerramientasController extends Controller
     {
         try {
             $validated = $request->validate([
-                'fk_Herramienta' => 'required|integer|exists:herramientas,id',
-                'fk_Actividad' => 'required|integer|exists:actividades,id',
-                'cantidadUsada' => 'required|numeric|min:0',
-                // agrega más validaciones si tienes más campos
+                'fk_Herramientas' => 'required|integer|exists:herramientas,id',
+                'fk_Actividades' => 'required|integer|exists:actividades,id',
             ]);
 
             UsosHerramientas::create($validated);
@@ -49,9 +49,8 @@ class UsosHerramientasController extends Controller
             $uso = UsosHerramientas::findOrFail($id);
 
             $validated = $request->validate([
-                'fk_Herramienta' => 'sometimes|integer|exists:herramientas,id',
-                'fk_Actividad' => 'sometimes|integer|exists:actividades,id',
-                'cantidadUsada' => 'sometimes|numeric|min:0',
+                'fk_Herramientas' => 'sometimes|integer|exists:herramientas,id',
+                'fk_Actividades' => 'sometimes|integer|exists:actividades,id',
             ]);
 
             $uso->update($validated);

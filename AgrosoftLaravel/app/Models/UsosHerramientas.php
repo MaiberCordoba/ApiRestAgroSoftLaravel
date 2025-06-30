@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UsosHerramientas extends Model
 {
+    protected $table = 'usosherramientas';
     use HasFactory;
 
     protected $fillable = [

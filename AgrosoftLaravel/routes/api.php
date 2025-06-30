@@ -158,7 +158,7 @@ Route::prefix('tiposDesecho')->middleware('auth:api')->group(function () {
 
 use App\Http\Controllers\UsosHerramientasController;
 
-Route::prefix('usosHerramientas')->middleware('auth:api')->group(function () {
+Route::prefix('usosherramientas')->middleware('auth:api')->group(function () {
     Route::get('/', [UsosHerramientasController::class, 'index']);
     Route::post('/', [UsosHerramientasController::class, 'store']);
     Route::get('/{id}', [UsosHerramientasController::class, 'show']);
