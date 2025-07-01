@@ -25,4 +25,17 @@ class Sensor extends Model
     {
         return $this->hasMany(Umbral::class);
     }
+
+    public function getUnidadAttribute()
+    {
+        return match($this->tipo_sensor) {
+            'Temperatura' => '°C',
+            'Iluminación' => 'lux',
+            'Humedad Ambiental', 'Humedad del Terreno' => '%',
+            'Nivel de PH' => 'pH',
+            'Viento' => 'km/h',
+            'Lluvia' => 'mm',
+            default => '',
+        };
+    }
 }

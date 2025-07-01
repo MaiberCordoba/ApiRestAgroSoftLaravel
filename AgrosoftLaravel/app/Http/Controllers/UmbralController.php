@@ -88,27 +88,6 @@ class UmbralController extends Controller
         ]);
     }
 
-    /**
-     * Eliminar un umbral
-     */
-    public function destroy($id)
-    {
-        $umbral = Umbral::find($id);
-        
-        if (!$umbral) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Umbral no encontrado'
-            ], 404);
-        }
-
-        $umbral->delete();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Umbral eliminado correctamente'
-        ]);
-    }
 
     /**
      * Verificar alertas para un sensor

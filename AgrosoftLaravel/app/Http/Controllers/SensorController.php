@@ -191,4 +191,48 @@ class SensorController extends Controller
             'data' => $sensor->umbrales
         ]);
     }
+
+    /**
+ * Obtener histórico de lecturas para un sensor específico
+ */
+public function obtenerHistoricoSensor($id, Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'fecha_inicio' => 'required|date',
+        'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'success' => false,
+            'errors' => $validator->errors()
+        ], 422);
+    }
+
+    try {
+        $historico = Sensor::where('id', $id)
+            ->whereBetween('fecha', [
+                $request->fecha_inicio,
+                $request->fecha_fin
+            ])
+            ->orderBy('fecha', 'asc')
+            ->get();
+
+        $historico->each(function ($registro) {
+            $registro->setAppends(['unidad']);
+        });
+
+        return response()->json([
+            'success' => true,
+            'data' => $historico
+        ]);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Error al obtener histórico del sensor',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
 }

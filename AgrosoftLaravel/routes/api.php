@@ -190,11 +190,11 @@ Route::prefix('sensores')->group(function () {
     Route::get('/', [\App\Http\Controllers\SensorController::class, 'index']);
     Route::post('/', [\App\Http\Controllers\SensorController::class, 'store']);
     Route::get('/{id}', [\App\Http\Controllers\SensorController::class, 'show']);
+    Route::get('/{id}/historico', [\App\Http\Controllers\SensorController::class, 'obtenerHistoricoSensor']);
 });
 // Umbral
 Route::prefix('umbral')->group(function () {
     Route::get('/', [\App\Http\Controllers\UmbralController::class, 'index']);
     Route::post('/{sensorId}', [\App\Http\Controllers\UmbralController::class, 'store']);
     Route::put('/{id}', [\App\Http\Controllers\UmbralController::class, 'update']);
-    Route::delete('/{id}', [\App\Http\Controllers\UmbralController::class, 'destroy']);
 });
