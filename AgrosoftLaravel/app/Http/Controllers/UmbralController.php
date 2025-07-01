@@ -14,13 +14,8 @@ class UmbralController extends Controller
 
     public function index()
     {
-        try {
-            $umbrales = Umbral::all();
-            return response()->json($umbrales, 200);
-        } catch (Exception $e) {
-             \Log::error('Error al listar los umbrales: ' . $e->getMessage());
-            return response()->json(['msg' => 'Internal server error'], 500);
-        }
+        $umbrales = Umbral::all();
+        return response()->json($umbrales);
     }
     /**
      * Crear un umbral para un sensor
@@ -65,7 +60,7 @@ class UmbralController extends Controller
     public function update(Request $request, $id)
     {
         $umbral = Umbral::find($id);
-        
+
         if (!$umbral) {
             return response()->json([
                 'success' => false,
