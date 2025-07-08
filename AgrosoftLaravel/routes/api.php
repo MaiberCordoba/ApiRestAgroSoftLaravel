@@ -7,6 +7,7 @@ use App\Http\Controllers\LotesController;
 use App\Http\Controllers\PlantacionesController;
 use App\Http\Controllers\SemillerosController;
 use App\Http\Controllers\TiposEspecieController;
+use App\Http\Controllers\TiposPlagaController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
@@ -181,6 +182,15 @@ Route::prefix('ventas')->middleware('auth:api')->group(function () {
     Route::post('/', [VentasController::class, 'store']);
     Route::get('/{id}', [VentasController::class, 'show']);
     Route::patch('/{id}', [VentasController::class, 'update']);
+});
+
+// RUTAS SANIDAD 
+
+Route::prefix('tipoPlaga')->middleware('jwt.verify')->group(function () {
+    Route::get('/', [TiposPlagaController::class, 'index']);
+    Route::post('/', [TiposPlagaController::class, 'store']);
+    Route::put('/{id}', [TiposPlagaController::class, 'update']);
+    Route::get('/{id}', [TiposPlagaController::class, 'show']);
 });
 
 // RUTAS IoT
