@@ -7,6 +7,7 @@ use App\Http\Controllers\LotesController;
 use App\Http\Controllers\PlagasController;
 use App\Http\Controllers\PlantacionesController;
 use App\Http\Controllers\SemillerosController;
+use App\Http\Controllers\TipoControlController;
 use App\Http\Controllers\TiposEspecieController;
 use App\Http\Controllers\TiposPlagaController;
 use App\Http\Controllers\UsuariosController;
@@ -201,6 +202,13 @@ Route::prefix('plaga')->middleware('jwt.verify')->group(function () {
     Route::get('/{id}', [PlagasController::class, 'show']);
 });
 
+Route::prefix('tiposcontrol')->middleware('jwt.verify')->group(function () {
+    Route::get('/', [TipoControlController::class, 'index']);
+    Route::post('/', [TipoControlController::class, 'store']);
+    Route::put('/{id}', [TipoControlController::class, 'update']);
+    Route::delete('/{id}', [TipoControlController::class, 'destroy']);
+    Route::get('/{id}', [TipoControlController::class, 'show']);
+});
 // RUTAS IoT
 
 // Sensor
