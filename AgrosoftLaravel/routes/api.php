@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AfeccionController;
 use App\Http\Controllers\CultivosController;
 use App\Http\Controllers\ErasController;
 use App\Http\Controllers\EspeciesController;
@@ -209,6 +210,16 @@ Route::prefix('tiposcontrol')->middleware('jwt.verify')->group(function () {
     Route::delete('/{id}', [TipoControlController::class, 'destroy']);
     Route::get('/{id}', [TipoControlController::class, 'show']);
 });
+
+
+// Rutas de afecciones
+Route::prefix('afecciones')->middleware('jwt.verify')->group(function () {
+    Route::get('/', [AfeccionController::class, 'index']);
+    Route::post('/', [AfeccionController::class, 'store']);
+    Route::put('/{id}', [AfeccionController::class, 'update']);
+    Route::get('/{id}', [AfeccionController::class, 'show']);
+});
+
 // RUTAS IoT
 
 // Sensor
