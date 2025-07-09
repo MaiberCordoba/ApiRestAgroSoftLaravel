@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AfeccionController;
+use App\Http\Controllers\ControlesController;
 use App\Http\Controllers\CultivosController;
 use App\Http\Controllers\ErasController;
 use App\Http\Controllers\EspeciesController;
@@ -218,6 +219,14 @@ Route::prefix('afecciones')->middleware('jwt.verify')->group(function () {
     Route::post('/', [AfeccionController::class, 'store']);
     Route::put('/{id}', [AfeccionController::class, 'update']);
     Route::get('/{id}', [AfeccionController::class, 'show']);
+});
+
+// Rutas de controles
+Route::prefix('controles')->middleware('jwt.verify')->group(function () {
+    Route::get('/', [ControlesController::class, 'index']);
+    Route::post('/', [ControlesController::class, 'store']);
+    Route::patch('/{id}', [ControlesController::class, 'update']);
+    Route::get('/{id}', [ControlesController::class, 'show']);
 });
 
 // RUTAS IoT
