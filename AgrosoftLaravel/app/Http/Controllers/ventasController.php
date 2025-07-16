@@ -27,8 +27,8 @@ class VentasController extends Controller
         try {
             $validated = $request->validate([
                 'fk_Cosechas'=> 'required',
-                'precioUnitario'=> 'required',
-                'fecha'=> 'required',
+                'precioUnitario'=> 'required|numeric',
+                'fecha'=> 'required|date',
             ]);
 
             Ventas::create($validated);

@@ -28,11 +28,10 @@ class CosechasController extends Controller
             $validated = $request->validate([
                 'fk_Cultivos' => 'required|integer|exists:cultivos,id',
                 'fecha' => 'required|date',
-                'unidades' => 'required',
+                'unidades' => 'required|integer',
             ]);
 
             Cosechas::create($validated);
-
             return response()->json(['msg' => 'Se creó correctamente'], 201);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
